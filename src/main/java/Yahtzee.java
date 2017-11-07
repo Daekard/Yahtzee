@@ -20,7 +20,7 @@ public class Yahtzee {
             score = FULLHOUSE;
         }
 
-        if (isThreeOfAKind(dice) || isThreeOfAKind(dice)) {
+        if (isThreeOfAKind(dice) || isFourOfAKind(dice)) {
             int sum = sumDice(dice);
             if (sum > score) {
                 score = sum;
@@ -58,12 +58,12 @@ public class Yahtzee {
 
 
     private boolean isYahtzee(int[] dice) {
-        return isNumberOfAKind(dice, 4);
+        return isNumberOfAKind(dice, 5);
     }
 
 
     private boolean isFullHouse(int[] dice) {
-        return isNumberOfAKind(dice, 2) && isNumberOfAKind(dice, 3);
+        return !isNumberOfAKind(dice, 4) && Arrays.stream(dice).distinct().count() == 2;
     }
 
     private int countConsecutive(int[] dice) {
