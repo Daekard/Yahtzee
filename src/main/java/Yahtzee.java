@@ -7,10 +7,29 @@ public class Yahtzee {
     private static int FULLHOUSE = 25;
     private static int SMALLSTRAIGHT = 30;
     private static int LARGESTRAIGHT = 40;
+    private static int YAHTZEE = 50;
 
-    public int score() {
+    public int score(int[] dice) {
+        int score = 0;
 
-        return 0;
+        if (isYahtzee(dice)) {
+            return YAHTZEE;
+        }
+
+        if (isFullHouse(dice)) {
+            score = FULLHOUSE;
+        }
+
+        if (isThreeOfAKind(dice) || isThreeOfAKind(dice)) {
+            int sum = sumDice(dice);
+            if (sum > score) {
+                score = sum;
+            }
+
+            return score;
+        }
+
+        return scoreStraight(dice);
     }
 
     public int scoreStraight(int[] dice) {
@@ -36,6 +55,12 @@ public class Yahtzee {
     private boolean isFourOfAKind(int[] dice) {
         return isNumberOfAKind(dice, 4);
     }
+
+
+    private boolean isYahtzee(int[] dice) {
+        return isNumberOfAKind(dice, 4);
+    }
+
 
     private boolean isFullHouse(int[] dice) {
         return isNumberOfAKind(dice, 2) && isNumberOfAKind(dice, 3);
